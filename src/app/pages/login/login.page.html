@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-text-center"><ion-icon name="planet" style="font-size: 80px;"></ion-icon></div>
+
+  <form #formulario="ngForm" (ngSubmit)="entrar(formulario)" class="mx-5">
+    
+    <ion-item>
+      <ion-input type="email" 
+      placeholder="Email" 
+      required
+      name="email"
+      [(ngModel)]="usuario.usuario"
+      pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="password" 
+      placeholder="Password"
+      name="password"
+      [(ngModel)]="usuario.clave"
+      required></ion-input>
+      
+    </ion-item>
+
+    <ion-button [disabled]="formulario.invalid" type="submit" expand="block" shape="round">
+      Login
+    </ion-button>
+   
+
+  </form>
+
+
+</ion-content>

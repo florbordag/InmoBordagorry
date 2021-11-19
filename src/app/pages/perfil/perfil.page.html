@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <app-header titulo= "Perfil"></app-header>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button id="cancel" expand="block" shape="round" (click)="habilitarEdicion()" [disabled]="cancel" >
+  {{habilitar ?'Cancelar':'Editar'}}
+  </ion-button>
+  <form class="mx-5" #formPerfil="ngForm" (ngSubmit)="editar(formPerfil)" >
+>
+    <ion-item>
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-input type="text" 
+      required
+      placeholder="Nombre" 
+      name="Nombre"
+      [(ngModel)]="propietario.nombre"
+      [disabled]="!habilitar">
+      </ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input type="email" 
+      placeholder="Email" 
+      [(ngModel)]="propietario.email"
+      required
+      name="email"
+      title="Email"
+      pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+      [disabled]="!habilitar"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Clave</ion-label>
+      <ion-input type="password" 
+      placeholder="Password"
+      [(ngModel)]="propietario.clave"
+      name="password"
+      required
+      [disabled]="!habilitar">
+    </ion-input>
+      
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Teléfono</ion-label>
+      <ion-input type="tel" 
+      placeholder="Telefono" 
+      [(ngModel)]="propietario.telefono"
+      required
+      name="Telefono"
+      title="Telefono"
+      [disabled]="!habilitar">
+      </ion-input>
+    </ion-item>
+
+    <ion-button  type="submit" expand="block" shape="round" [disabled]="!habilitar">
+      Guardar
+    </ion-button>
+  </form>
+
+</ion-content>

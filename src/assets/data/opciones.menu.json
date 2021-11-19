@@ -1,0 +1,17 @@
+[
+    {
+        "icono": "location-outline",
+        "titulo": "Ubicacion",
+        "ruta": "/mapa"
+    },
+    {
+        "icono": "person-circle-outline",
+        "titulo": "Perfil",
+        "ruta": "/perfil"
+    },
+    {
+        "icono": "home-outline",
+        "titulo": "Inmuebles",
+        "ruta": "/inmuebles"
+    }
+]
