@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Inmueble } from '../Interfaces/Inmueble';
+import { Inmueble, NuevoInmueble } from '../Interfaces/Inmueble';
 import { StorageService } from './storage-service.service';
 
 @Injectable({
@@ -52,7 +52,7 @@ export class InmuebleService {
     ).subscribe(res => resolve(res), err => reject(err)));
   }
   
-  public async CreateInmueble(inmueble: Inmueble) { //probar perfil: any
+  public async CreateInmueble(inmueble: NuevoInmueble) { 
     //crear headers para enviar json en body y agregar token
     const headers = {
       contentType: 'application/json',
@@ -60,10 +60,29 @@ export class InmuebleService {
     };
     //enviar peticion http con credenciales
     return new Promise((resolve, reject) =>
-    this.httpCliente.post<Inmueble>('http://practicastuds.ulp.edu.ar/api/Inmuebles' , inmueble, { headers }
+    this.httpCliente.post<NuevoInmueble>('http://practicastuds.ulp.edu.ar/api/Inmuebles' , inmueble, { headers }
     ).subscribe(res => resolve(res), err => reject(err)));
   }
   
+
+
+  
+  public async deleteInmueble(id) {
+    //crear headers para enviar json en body y agregar token
+    const headers = {
+      contentType: 'application/json',
+      authorization: `Bearer ${await this.getToken()}`
+    };
+    //enviar peticion http con credenciales
+    return new Promise<Inmueble>((resolve, reject) =>
+    this.httpCliente.delete<Inmueble> ('http://practicastuds.ulp.edu.ar/api/Inmuebles/'+id,	{ headers }
+    )//.subscribe(res => resolve(res), err => reject(err)));
+    .subscribe(res => {
+      resolve(res);
+      }, err => reject(err)));
+  }
+
+
 
   private async getToken(): Promise<string> {
     return this.storage.get('token');

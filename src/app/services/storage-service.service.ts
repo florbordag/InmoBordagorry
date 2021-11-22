@@ -51,5 +51,13 @@ export class StorageService {
       console.log(key, await this.storage?.get(key));
     }
   }
+
+ public async getToken(): Promise<string> {
+    return this.storage.get('token');
+  }
   
+  public async setToken(token: string){
+    return await this.storage?.set('token', token);
+  }
+
 }

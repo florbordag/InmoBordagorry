@@ -22,7 +22,7 @@ export class DataService {
     this.httpCliente.post('http://practicastuds.ulp.edu.ar/api/propietarios/login',
     credenciales, {responseType: 'text'}
     ).subscribe(res => {
-      this.storage.set('token', res);
+      this.storage.setToken(res);
       resolve(res);
     }, err => reject(err)));
   }

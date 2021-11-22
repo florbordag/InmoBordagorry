@@ -5,18 +5,202 @@
 </ion-header>
 <ion-content>
     
-  <ion-card>
-    <ion-item>
-      <ion-icon name="pin" slot="start"></ion-icon>
-      <ion-label>ion-item in a card, icon left, button right</ion-label>
-      <ion-button fill="outline" slot="end">View</ion-button>
-    </ion-item>
-  
-    <ion-card-content>
-      This is content, without any paragraph or header tags,
-      within an ion-card-content element.
-    </ion-card-content>
-  </ion-card>
+<!-- ver inmuebles -->
+  <div class="accordion" id="accordionExample">
+    <div class="accordion-item" *ngFor="let inmueble of inmueblese">  
+
+      <ion-item>
+        <ion-icon name="pin" slot="start"></ion-icon>
+        <ion-label> {{inmueble.direccion}} </ion-label>
+        <ion-button fill="outline" slot="end" [id]="inmueble.id" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse'+ inmueble.id" aria-expanded="false" [attr.aria-controls]="'collapse'+ inmueble.id" (click)="ObtenerInmueble(inmueble.id)">Detalle</ion-button>
+      </ion-item>
+
+      <div id="collapse{{inmueble.id}}" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading'+ inmueble.id" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+
+       
+      
+      <ion-grid>
+        <ion-row  class="ion-align-items-center">
+          <ion-col>
+            <img src="https://images.emojiterra.com/google/android-pie/512px/1f3e0.png" style="width: 50px; align-items: center;">
+         </ion-col>
+         <ion-col>
+          <strong> Latitud : </strong>  {{inmueble.latitud}} <br>
+          <strong> Longitud : </strong>  {{inmueble.longitud}} <br>
+          <strong> Superficie : </strong>  {{inmueble.superficie}}
+        </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+
+
+
+      <div class="accordion" id="accordionEditar">
+        <div class="accordion-item">  
+    
+          <ion-button  expand="full" data-bs-toggle="collapse"  [attr.data-bs-target]="'#collapseEditar'+ inmueble.id" aria-expanded="false" [attr.aria-controls]="'collapseEditar'+ inmueble.id">
+            <ion-icon slot="start" name="add-outline"></ion-icon>
+            Editar inmueble</ion-button>
+        
+    
+          <div id="collapseEditar{{inmueble.id}}" class="accordion-collapse collapse" [attr.aria-labelledby]="'collapseEditar'+ inmueble.id" data-bs-parent="#accordionEditar">
+            <div class="accordion-body">
+    
+                            
+              <form class="mx-5" #formEditar="ngForm"  (ngSubmit)="editarInmueble(formEditar)">
+
+                <ion-item>
+                  <ion-label position="stacked">Direccion</ion-label>
+                  <ion-input type="text" 
+                  required
+                  name="Direccion"
+                  [(ngModel)]="inmuebleSolo.direccion"
+                  >
+                  </ion-input>
+                </ion-item>
+
+
+                <ion-item>
+                  <ion-label position="stacked">Latitud</ion-label>
+                  <ion-input type="number" 
+                  [(ngModel)]="inmuebleSolo.latitud"
+                  required
+                  name="Latitud"
+                  title="Latitud"
+                  ></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="stacked">Longitud</ion-label>
+                  <ion-input type="number" 
+                  [(ngModel)]="inmuebleSolo.longitud"
+                  name="Longitud"
+                  required>
+                </ion-input>
+                  
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="stacked">Superficie</ion-label>
+                  <ion-input type="number" 
+                  [(ngModel)]="inmuebleSolo.superficie"
+                  required
+                  name="Superficie"
+                  title="Superficie">
+                  </ion-input>
+                </ion-item>
+
+                <ion-button  type="submit" expand="block" shape="round">
+                  Guardar
+                </ion-button>
+              </form>
+          
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <ion-button expand="full" color="danger" (click)="editarAlertConfirm()" >
+        <ion-icon slot="start" name="trash"></ion-icon>
+        Eliminar inmueble</ion-button>
+      
+
+
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+<!-- ver inmuebles -->
+
+
+
+
+<!-- crear Inmueble-->
+
+  <div class="accordion" id="accordionCrear">
+    <div class="accordion-item">  
+
+      <ion-button expand="full" data-bs-toggle="collapse"  data-bs-target="#collapse" aria-expanded="false" aria-controls="collapse">
+        <ion-icon slot="start" name="add-outline"></ion-icon>
+        Crear inmueble</ion-button>
+    
+
+      <div id="collapse" class="accordion-collapse collapse" aria-labelledby="crearInmueble" data-bs-parent="#accordionCrear">
+        <div class="accordion-body">
+
+          <form class="mx-5" #formInmueble="ngForm" (ngSubmit)="crearInmueble(formInmueble)" >
+
+                <ion-item>
+                  <ion-label position="stacked">Direccion</ion-label>
+                  <ion-input type="text" 
+                  required
+                  placeholder="Dirección" 
+                  name="Direccion"
+                  [(ngModel)]="nuevoInmueble.direccion">
+                  </ion-input>
+                </ion-item>
+            
+            
+                <ion-item>
+                  <ion-label position="stacked">Latitud</ion-label>
+                  <ion-input type="number" 
+                  placeholder="Latitud" 
+                  [(ngModel)]="nuevoInmueble.latitud"
+                  required
+                  name="Latitud"
+                  title="Latitud"
+                  ></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="stacked">Longitud</ion-label>
+                  <ion-input type="number" 
+                  placeholder="Longitud"
+                  [(ngModel)]="nuevoInmueble.longitud"
+                  name="Longitud"
+                  required>
+                </ion-input>
+                  
+                </ion-item>
+            
+                <ion-item>
+                  <ion-label position="stacked">Superficie</ion-label>
+                  <ion-input type="number" 
+                  placeholder="Superficie" 
+                  [(ngModel)]="nuevoInmueble.superficie"
+                  required
+                  name="Superficie"
+                  title="Superficie">
+                  </ion-input>
+                </ion-item>
+
+                <!-- <ion-input  type="number" name="propietarioId" [(ngModel)]="nuevoInmueble.propietarioId" ></ion-input>
+             -->
+                <ion-button  type="submit" expand="block" shape="round">
+                  Guardar
+                </ion-button>
+              </form>
+      
+        </div>
+      </div>
+    </div>
+  </div> 
+
+<!-- crear Inmueble -->
 
 
 </ion-content>
+
+
+
+
+
+

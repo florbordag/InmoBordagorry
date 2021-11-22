@@ -36,6 +36,7 @@ export class PerfilPage implements OnInit {
   public editar(){
     console.log('editar perfil');
     this.ServPerfil.setPerfil(this.propietario);
+    location.reload();
 
 //    this.habilitar = !this.habilitar;
   }

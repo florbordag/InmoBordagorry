@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { UsuarioIdGuard } from './guards/usuario-id.guard';
 
 const routes: Routes = [
   {
@@ -21,11 +22,15 @@ const routes: Routes = [
   },
   {
     path: 'perfil',
-    loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
+    loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule),
+    canLoad: [UsuarioIdGuard],
+    canActivate: [UsuarioIdGuard],
   },
   {
     path: 'inmuebles',
-    loadChildren: () => import('./pages/inmuebles/inmuebles.module').then( m => m.InmueblesPageModule)
+    loadChildren: () => import('./pages/inmuebles/inmuebles.module').then( m => m.InmueblesPageModule),
+    canLoad: [UsuarioIdGuard],
+    canActivate: [UsuarioIdGuard],
   },
 ];
 
