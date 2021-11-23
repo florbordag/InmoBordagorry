@@ -8,7 +8,7 @@
       
       <ion-content>
         <ion-list>
-          <ion-item *ngFor="let r of rutas | async" [routerLink]="r.ruta">
+          <ion-item *ngFor="let r of rutas | async" [routerLink]="r.ruta" (click)="cerrarMenu()">
             <ion-icon slot="start" [name]="r.icono" color="primary"></ion-icon>
               {{r.titulo}}
           </ion-item>

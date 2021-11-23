@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { AlertController, MenuController } from '@ionic/angular';
+import { menuController } from '@ionic/core';
 import { Observable } from 'rxjs';
 import { Componente } from './Interfaces/Componente';
 import { DataService } from './services/data.service';
@@ -13,7 +15,7 @@ import { StorageService } from './services/storage-service.service';
 export class AppComponent implements OnInit {
   rutas: Observable<Componente[]>;
 
-  constructor(private dataSvc: DataService, private storage : StorageService, private alertController: AlertController) { }
+  constructor(private dataSvc: DataService, private storage : StorageService, private alertController: AlertController, private router: Router, public menuController : MenuController) { }
 
   ngOnInit() {
     this.rutas = this.dataSvc.getMenuOpts();
@@ -41,11 +43,15 @@ export class AppComponent implements OnInit {
           handler: () => {
             console.log('Confirm Okay');
             this.CerrarSesion();
-            location.reload();
+            this.router.navigate[('/login')];
           }
         }
       ]
     });   await alert.present();
   }
   
+  cerrarMenu(){
+    menuController.close();
+  }
+
 }
