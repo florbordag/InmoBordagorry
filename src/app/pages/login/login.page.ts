@@ -33,7 +33,7 @@ export class LoginPage implements OnInit {
       return;
     }
     console.log('Token: ', token);
-    this.router.navigate(['/perfil'])
+    this.router.navigate(['/mapa'])
 
     
     
